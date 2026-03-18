@@ -76,7 +76,7 @@ export default function Stage2() {
   };
 
   return (
-    <main className="relative w-screen h-screen bg-[#0f0e17] flex items-center justify-center overflow-hidden font-sans">
+    <main className="relative w-full h-full bg-[#0f0e17] flex items-center justify-center overflow-hidden font-sans">
       <HeaderTimer />
       <InventorySidebar />
       <DialogBox />

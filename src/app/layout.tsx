@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/Providers";
 import "./globals.css";
+import { ChatPanel } from "@/components/ChatPanel";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "천재 탐정 K: 방탈출 데모",
-  description: "탐정 K의 비밀 수첩을 테마로 한 웹 방탈출 게임",
+  title: "천재 탐정 K - 비밀 수첩 방탈출",
+  description: "탐정 K의 사무소에서 단서를 찾아 탈출하세요.",
 };
 
 export default function RootLayout({
@@ -26,10 +27,17 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased custom-cursor bg-black text-white overflow-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased custom-cursor overflow-hidden bg-[#111]`}
       >
         <Providers>
-          {children}
+          <div className="flex w-screen h-screen overflow-hidden">
+            {/* Left Game Area */}
+            <div className="flex-1 relative border-r border-slate-700/50">
+              {children}
+            </div>
+            {/* Right Chat Panel */}
+            <ChatPanel />
+          </div>
         </Providers>
       </body>
     </html>

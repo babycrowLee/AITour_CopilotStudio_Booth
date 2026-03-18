@@ -27,3 +27,205 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ===== Room Design Styles ===== */
+
+/* Wood floor pattern */
+.wood-floor {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #8B7355 0px,
+      #A0845C 3px,
+      #8B7355 6px
+    ),
+    linear-gradient(
+      180deg,
+      #7A6548 0%,
+      #8B7355 30%,
+      #9E8462 60%,
+      #8B7355 100%
+    );
+  background-blend-mode: overlay;
+}
+
+/* Wood floor plank lines */
+.wood-floor::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 28px,
+      rgba(0,0,0,0.08) 28px,
+      rgba(0,0,0,0.08) 30px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 120px,
+      rgba(0,0,0,0.05) 120px,
+      rgba(0,0,0,0.05) 122px
+    );
+  pointer-events: none;
+}
+
+/* Wall texture */
+.wall-texture {
+  background:
+    linear-gradient(180deg, #6B7B8D 0%, #7A8A9B 40%, #8694A3 80%, #7A8A9B 100%);
+}
+
+.wall-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 60%, rgba(0,0,0,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Baseboard */
+.baseboard {
+  background: linear-gradient(180deg, #4A4238 0%, #3D362F 50%, #332D27 100%);
+}
+
+/* Wood desk surface */
+.wood-desk {
+  background: linear-gradient(
+    180deg,
+    #A58B6F 0%,
+    #96795C 30%,
+    #8B6E50 100%
+  );
+}
+
+/* Door style */
+.room-door {
+  background: linear-gradient(
+    90deg,
+    #9E7E5A 0%,
+    #B08E68 20%,
+    #A58360 50%,
+    #9E7E5A 80%,
+    #8B6E50 100%
+  );
+}
+
+/* Calendar modal */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calendar-day {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 50%;
+  color: #334155;
+}
+
+.calendar-day.circled {
+  position: relative;
+  color: #dc2626;
+  font-weight: 800;
+}
+
+.calendar-day.circled::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border: 2.5px solid #dc2626;
+  border-radius: 50%;
+  animation: circled-pulse 2s ease-in-out infinite;
+}
+
+@keyframes circled-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Stage banner animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stage-banner {
+  animation: slideDown 0.8s ease-out forwards;
+}
+
+/* Guide text fade */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.guide-text {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Shelf style */
+.wall-shelf {
+  background: linear-gradient(180deg, #8B7355 0%, #7A6548 100%);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* Picture frame */
+.picture-frame {
+  background: linear-gradient(135deg, #2D4A3E 0%, #1A3028 100%);
+  border: 3px solid #5A4A3A;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.4), 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* Plant pot */
+.plant-pot {
+  background: linear-gradient(180deg, #8B5E3C 0%, #6B4226 100%);
+}
+
+/* Steam animation for coffee */
+@keyframes steam {
+  0% { opacity: 0; transform: translateY(0) scaleX(1); }
+  50% { opacity: 0.6; transform: translateY(-8px) scaleX(1.2); }
+  100% { opacity: 0; transform: translateY(-16px) scaleX(0.8); }
+}
+
+.steam-line {
+  animation: steam 2s ease-in-out infinite;
+}
+
+.steam-line:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.steam-line:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+/* Outlet */
+.wall-outlet {
+  background: #E8E0D4;
+  border: 1px solid #C0B8AC;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}

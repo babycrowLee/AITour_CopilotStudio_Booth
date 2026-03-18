@@ -30,7 +30,7 @@ export default function Ending() {
   };
 
   return (
-    <main className="relative w-screen h-screen bg-black flex items-center justify-center overflow-hidden font-sans">
+    <main className="relative w-full h-full bg-black flex items-center justify-center overflow-hidden font-sans">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#1e1b4b_0%,_#000000_100%)]"></div>
       
