@@ -45,7 +45,8 @@ export function ChatPanel() {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const pendingCertificateRequestRef = useRef<CertificateRequest | null>(null);
 
-  const directLineSecret = process.env.NEXT_PUBLIC_DIRECT_LINE_SECRET || '';
+  // const directLineSecret = process.env.NEXT_PUBLIC_DIRECT_LINE_SECRET || '';
+  const directLineSecret = '8ooQOPojaBtfFbNODZRauzRLHZfgm3i5KBI3s0TpB3pNbP4aXGQQJQQJ99CCACqBBLyAArohAAABAZBS11NX'
   const webChatApi =
     typeof window === 'undefined' ? undefined : (window as Window & { WebChat?: WebChatApi }).WebChat;
 
