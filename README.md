@@ -29,5 +29,59 @@ npm run dev
 - **Icons**: Lucide React
 - **State Management**: React Context & LocalStorage
 
+## Architecture
+```mermaid
+flowchart LR
+
+  %% =======================
+  %% As-Is Architecture
+  %% =======================
+  subgraph HOST["Azure Static Web Apps (Static Next.js Hosting)"]
+    subgraph BROWSER["User Browser / Kiosk Session"]
+      GP["Game Pages\nStage 1 / Stage 2 / Ending"]
+      GC["GameProvider (React Context)\nstage, collectedHints, timeLeft, dialog"]
+      LS["localStorage\npersist: stage + hints"]
+      CP["ChatPanel\nBot Framework Web Chat\nDirectLine client (createDirectLine)"]
+
+      GP -->|"addHint(), goToStage(), showDialog()"| GC
+      GC <-->|"persist / restore"| LS
+      GC -->|"shared game context"| CP
+    end
+
+    CDN["Static assets\n(HTML/JS/CSS)"]
+    CDN -->|"serve app"| GP
+  end
+
+  DL["Direct Line Service\n(Bot Framework Direct Line API 3.0)"]
+  AG["Copilot Studio Agent\nhint dialog / context-aware flow"]
+
+  CP -->|"postActivity: event = startConversation"| DL
+  CP -->|"postActivity: event = setContext\n(gCurrentStage, gCurrentHints,\ngCurrentStageLabel, gClearTime)"| DL
+  DL -->|"activities"| AG
+  AG -->|"activities"| DL
+  DL -->|"activities"| CP
+
+  %% =======================
+  %% Notes / Constraints
+  %% =======================
+  NB["Repo characteristic:\nNo dedicated game backend\nNo Next.js API layer"]
+  SEC["Current risk:\nDirect Line secret used client-side\n(should avoid exposing secret)"]
+  DLNOTE["Direct Line auth:\nAuthorization: Bearer SECRET_OR_TOKEN\n(secret or token)"]
+
+  HOST -.-> NB
+  CP -.-> SEC
+  DL -.-> DLNOTE
+
+  %% =======================
+  %% Recommended (Minimal Backend Add-on)
+  %% =======================
+  subgraph REC["Recommended add-on (Production hardening)"]
+    TOK["Token Broker API\n(Azure Function / API)\nIssue short-lived Direct Line token"]
+  end
+
+  CP -.->|"request token (recommended)"| TOK
+  TOK -.->|"return short-lived token"| CP
+```
+
 ## 💡 플레이 팁
 > 제한 시간 안에 맵 내의 여러 단서(힌트)를 찾아 모으고, 최종 비밀번호나 키워드를 유추해 닫혀 있는 문과 시스템의 잠금을 해제하세요!
