@@ -29,7 +29,7 @@ npm run dev
 - **Icons**: Lucide React
 - **State Management**: React Context & LocalStorage
 
-## Web Architecture
+## Architecture
 ```mermaid
 flowchart LR
 
