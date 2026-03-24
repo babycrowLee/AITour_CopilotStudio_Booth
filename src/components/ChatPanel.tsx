@@ -143,8 +143,11 @@ export function ChatPanel() {
     if (!isChatStarted || !webChatStore) return;
 
     let stageLabel = 'START';
-    if (stage === 1 && collectedHints.length > 0) stageLabel = 'CLUE_FOUND';
-    if (stage === 2) stageLabel = 'CODE_KNOWN';
+    if (stage === 1 && collectedHints.length > 0) stageLabel = 'CLUE_FOUND_1';
+
+    if (stage === 2 && collectedHints.length === 0) stageLabel = 'CODE_KNOWN';
+    if (stage === 2 && collectedHints.length > 0) stageLabel = 'CLUE_FOUND_2';
+
     if (stage === 3) stageLabel = 'ESCAPED';
 
     const contextValue = {
